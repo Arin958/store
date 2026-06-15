@@ -8,7 +8,7 @@ interface LayoutProps {
 
 const Layout = async ({ children }: LayoutProps) => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col overflow-x-hidden">
       
       <main className="flex-1 px-5">
         {children}
