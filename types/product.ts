@@ -5,5 +5,8 @@ export interface Product {
   price: number;
   category: string;
   description: string;
+  stock: number;
+  sold: number;
   primaryImageIndex?: number;
+  createdAt: string;
 }

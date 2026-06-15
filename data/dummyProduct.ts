@@ -13,6 +13,9 @@ export const products: Product[] = [
       category: 'Electronics',
       description: 'High-quality wireless headphones with noise cancellation and 20-hour battery life.',
       primaryImageIndex: 0,
+      stock: 10,
+      sold: 5,
+      createdAt: '2023-08-01T10:00:00.000Z',
     },
     {
       id: '2',
@@ -26,6 +29,9 @@ export const products: Product[] = [
       category: 'Clothing',
       description: 'Soft, breathable 100% cotton t-shirt available in multiple colors.',
       primaryImageIndex: 0,
+      stock: 20,
+      sold: 10,
+      createdAt: '2024-05-01T10:00:00.000Z',
     },
     {
       id: '3',
@@ -39,6 +45,9 @@ export const products: Product[] = [
       category: 'Books',
       description: 'A gripping novel about the choices that define our lives.',
       primaryImageIndex: 0,
+      stock: 15,
+      sold: 8,
+      createdAt: '2023-09-01T10:00:00.000Z',
     },
     {
       id: '4',
@@ -52,6 +61,9 @@ export const products: Product[] = [
       category: 'Home & Garden',
       description: 'Set of 4 handmade ceramic mugs perfect for your morning coffee.',
       primaryImageIndex: 0,
+      stock: 12,
+      sold: 6,
+      createdAt: '2023-07-01T10:00:00.000Z',
     },
     {
       id: '5',
@@ -65,6 +77,9 @@ export const products: Product[] = [
       category: 'Sports',
       description: 'Eco-friendly non-slip yoga mat with carrying strap.',
       primaryImageIndex: 0,
+      stock: 8,
+      sold: 4,
+      createdAt: '2023-06-01T10:00:00.000Z',
     },
     {
       id: '6',
@@ -78,6 +93,9 @@ export const products: Product[] = [
       category: 'Electronics',
       description: 'Fitness tracker with heart rate monitor and GPS.',
       primaryImageIndex: 0,
+      stock: 5,
+      sold: 3,
+      createdAt: '2023-05-01T10:00:00.000Z',
     },
     {
       id: '7',
@@ -91,6 +109,9 @@ export const products: Product[] = [
       category: 'Toys',
       description: '500-piece creative building blocks for ages 6+.',
       primaryImageIndex: 0,
+      stock: 10,
+      sold: 5,
+      createdAt: '2023-04-01T10:00:00.000Z',
     },
     {
       id: '8',
@@ -104,6 +125,9 @@ export const products: Product[] = [
       category: 'Beauty',
       description: 'Complete 5-piece skincare routine for glowing skin.',
       primaryImageIndex: 0,
+      stock: 8,
+      sold: 4,
+      createdAt: '2023-03-01T10:00:00.000Z',
     },
     {
       id: '9',
@@ -117,6 +141,9 @@ export const products: Product[] = [
       category: 'Automotive',
       description: 'Universal dashboard car phone mount with strong suction.',
       primaryImageIndex: 0,
+      stock: 12,
+      sold: 6,
+      createdAt: '2023-02-01T10:00:00.000Z',
     },
     {
       id: '10',
@@ -130,6 +157,9 @@ export const products: Product[] = [
       category: 'Electronics',
       description: 'Mechanical RGB gaming keyboard with customizable keys.',
       primaryImageIndex: 0,
+      stock: 6,
+      sold: 3,
+      createdAt: '2023-01-01T10:00:00.000Z',
     },
     {
       id: '11',
@@ -143,6 +173,9 @@ export const products: Product[] = [
       category: 'Clothing',
       description: 'Water-resistant winter jacket with fleece lining.',
       primaryImageIndex: 0,
+      stock: 4,
+      sold: 2,
+      createdAt: '2022-12-01T10:00:00.000Z',
     },
     {
       id: '12',
@@ -156,6 +189,9 @@ export const products: Product[] = [
       category: 'Books',
       description: '100 simple recipes for busy home cooks.',
       primaryImageIndex: 0,
+      stock: 5,
+      sold: 3,
+      createdAt: '2022-11-01T10:00:00.000Z',
     },
     {
       id: '13',
@@ -169,6 +205,9 @@ export const products: Product[] = [
       category: 'Home & Garden',
       description: 'Modern ceramic plant pot with drainage hole.',
       primaryImageIndex: 0,
+      stock: 7,
+      sold: 4,
+      createdAt: '2022-10-01T10:00:00.000Z',
     },
     {
       id: '14',
@@ -182,6 +221,9 @@ export const products: Product[] = [
       category: 'Sports',
       description: 'Official size and weight indoor/outdoor basketball.',
       primaryImageIndex: 0,
+      stock: 8,
+      sold: 4,
+      createdAt: '2022-09-01T10:00:00.000Z',
     },
     {
       id: '15',
@@ -195,6 +237,9 @@ export const products: Product[] = [
       category: 'Electronics',
       description: 'Ergonomic wireless mouse with silent clicks.',
       primaryImageIndex: 0,
+      stock: 9,
+      sold: 5,
+      createdAt: '2022-08-01T10:00:00.000Z',
     },
     {
       id: '16',
@@ -208,6 +253,9 @@ export const products: Product[] = [
       category: 'Toys',
       description: 'Beautiful landscape jigsaw puzzle for adults.',
       primaryImageIndex: 0,
+      stock: 10,
+      sold: 6,
+      createdAt: '2022-07-01T10:00:00.000Z',
     },
     {
       id: '17',
@@ -221,6 +269,9 @@ export const products: Product[] = [
       category: 'Beauty',
       description: 'Professional ionic hair dryer with multiple heat settings.',
       primaryImageIndex: 0,
+      stock: 11,
+      sold: 7,
+      createdAt: '2022-06-01T10:00:00.000Z',
     },
     {
       id: '18',
@@ -234,6 +285,9 @@ export const products: Product[] = [
       category: 'Automotive',
       description: 'Portable handheld car vacuum with attachments.',
       primaryImageIndex: 0,
+      stock: 12,
+      sold: 8,
+      createdAt: '2022-05-01T10:00:00.000Z',
     },
     {
       id: '19',
@@ -247,6 +301,9 @@ export const products: Product[] = [
       category: 'Clothing',
       description: 'Lightweight breathable running shoes for men.',
       primaryImageIndex: 0,
+      stock: 13,
+      sold: 9,
+      createdAt: '2022-04-01T10:00:00.000Z',
     },
     {
       id: '20',
@@ -260,6 +317,9 @@ export const products: Product[] = [
       category: 'Home & Garden',
       description: 'LED desk lamp with adjustable brightness and color temperature.',
       primaryImageIndex: 0,
+      stock: 14,
+      sold: 10,
+      createdAt: '2022-03-01T10:00:00.000Z',
     },
   ];
 

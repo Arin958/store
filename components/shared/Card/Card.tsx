@@ -4,6 +4,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent } from '@/components/ui/card';
 import { CardImage } from './CardImage';
 import { CategoryContent, ProductContent } from './ProductContent';
+import { CardSkeleton } from '../CardGrid/CardSkelon';
 
 interface BaseCardProps {
   id: string;
@@ -29,18 +30,6 @@ interface CategoryCardProps extends BaseCardProps {
 type SharedCardProps = ProductCardProps | CategoryCardProps;
 
 
-
-
-const CardSkeleton = () => (
-  <Card className="overflow-hidden">
-    <Skeleton className="h-48 w-full" />
-    <CardContent className="p-4 space-y-3">
-      <Skeleton className="h-6 w-3/4" />
-      <Skeleton className="h-8 w-1/3" />
-      <Skeleton className="h-4 w-1/2" />
-    </CardContent>
-  </Card>
-);
 
 export const SharedCard = (props: SharedCardProps) => {
   const { 
