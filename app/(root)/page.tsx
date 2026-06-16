@@ -6,12 +6,18 @@ import { useProductStore } from '@/store/useProductStore';
 
 import { SharedGrid } from '@/components/shared/CardGrid/CardGrid';
 import { getCategoriesFromProducts, getFeaturedProducts } from '@/lib/productUtils';
+import { useEffect } from 'react';
 
 export default function HomePage() {
-  const { products, isLoading, getProductsByCategory } = useProductStore();
+  const { products, isLoading, getProductsByCategory, isInitialized, initializeStore } = useProductStore();
+
   
   const categories = getCategoriesFromProducts(products);
   const featuredProducts = getFeaturedProducts(products, 8);
+
+  useEffect(() => {
+    initializeStore();
+  }, [isInitialized, initializeStore]);
   
   return (
     <div className="container mx-auto py-8 space-y-16">

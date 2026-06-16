@@ -32,6 +32,7 @@ export const products: Product[] = [
       stock: 20,
       sold: 10,
       createdAt: '2024-05-01T10:00:00.000Z',
+      sizes: ['S', 'M', 'L', 'XL'],
     },
     {
       id: '3',
@@ -48,7 +49,9 @@ export const products: Product[] = [
       stock: 15,
       sold: 8,
       createdAt: '2023-09-01T10:00:00.000Z',
+    
     },
+
     {
       id: '4',
       name: 'Ceramic Coffee Mug Set',
@@ -176,6 +179,7 @@ export const products: Product[] = [
       stock: 4,
       sold: 2,
       createdAt: '2022-12-01T10:00:00.000Z',
+      sizes: ['S', 'M', 'L', 'XL'],
     },
     {
       id: '12',
@@ -208,6 +212,7 @@ export const products: Product[] = [
       stock: 7,
       sold: 4,
       createdAt: '2022-10-01T10:00:00.000Z',
+      sizes: ['S', 'M', 'L', 'XL'],
     },
     {
       id: '14',
@@ -304,6 +309,7 @@ export const products: Product[] = [
       stock: 13,
       sold: 9,
       createdAt: '2022-04-01T10:00:00.000Z',
+      sizes: ['M', 'L', 'XL'],
     },
     {
       id: '20',

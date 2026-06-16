@@ -9,21 +9,43 @@ interface ProductStore {
     products: Product[];
     isLoading: boolean;
     error: string | null;
+    isInitialized: boolean; // Add this
     setProducts: (products: Product[]) => void;
-    addProduct: (productData: Omit<Product, 'id'>) => string; 
-    updateProduct: (id: string, updatedProduct: Partial<Product>) => void; 
+    addProduct: (productData: Omit<Product, 'id'>) => string;
+    updateProduct: (id: string, updatedProduct: Partial<Product>) => void;
     deleteProduct: (id: string) => void;
-    getProductById: (id: string) => Product | undefined; 
+    getProductById: (id: string) => Product | undefined;
     getProductsByCategory: (category: string) => Product[];
     clearProducts: () => void;
+    initializeStore: () => void;
 }
 
 export const useProductStore = create<ProductStore>()(
     persist(
         (set, get) => ({
-            products: products,
-            isLoading: false,
+            products: [],
+            isLoading: true,
             error: null,
+            isInitialized: false, // Add this
+
+            initializeStore: () => {
+                const currentProducts = get().products;
+                const stored = localStorage.getItem('product-storage');
+                setTimeout(() => {
+                    if (currentProducts.length === 0 && !stored) {
+                        set({ 
+                            products: products,
+                            isLoading: false,
+                            isInitialized: true
+                        });
+                    } else {
+                        set({ 
+                            isLoading: false,
+                            isInitialized: true
+                        });
+                    }
+                }, 1000);
+            },
 
             setProducts: (products) => set({ products }),
 
@@ -42,23 +64,23 @@ export const useProductStore = create<ProductStore>()(
                 return newId;
             },
 
-            updateProduct: (id: string, updatedProduct: Partial<Product>) => // Fixed: added proper types
+            updateProduct: (id: string, updatedProduct: Partial<Product>) =>
                 set((state) => ({
                     products: state.products.map((product) =>
                         product.id === id ? { ...product, ...updatedProduct } : product
                     ),
                 })),
 
-            deleteProduct: (id: string) => // Fixed: added type
+            deleteProduct: (id: string) =>
                 set((state) => ({
                     products: state.products.filter((product) => product.id !== id),
                 })),
 
-            getProductById: (id: string) => { // Fixed: singular name and added type
+            getProductById: (id: string) => {
                 return get().products.find((product) => product.id === id);
             },
 
-            getProductsByCategory: (category: string) => { // Fixed: added type
+            getProductsByCategory: (category: string) => {
                 return get().products.filter((product) => product.category === category);
             },
 

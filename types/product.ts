@@ -7,6 +7,7 @@ export interface Product {
   description: string;
   stock: number;
   sold: number;
+  sizes?: string[];
   primaryImageIndex?: number;
   createdAt: string;
 }

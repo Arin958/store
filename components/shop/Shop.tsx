@@ -14,6 +14,8 @@ export default function ShopPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { products, isLoading } = useProductStore();
+
+
   
   // Get filters from URL params
   const [filters, setFilters] = useState<{
