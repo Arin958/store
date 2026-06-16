@@ -11,6 +11,7 @@ export const useAuthStore = create<AuthState>()(
       token: null,
       isAuthenticated: false,
       
+
       login: (email: string, password: string): boolean => {
         // Find user by email and password
         const foundUser = DUMMY_USERS.find(
