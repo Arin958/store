@@ -1,12 +1,11 @@
-// components/ui/shared-grid.tsx
+
 'use client';
 
 import { cn } from '@/lib/utils';
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 
 
 import { Skeleton } from '@/components/ui/skeleton';
-import { SharedCard } from '../Card/Card';
 import { GRID_CONFIG, GridSkeleton } from './GridSkeleton';
 import { SliderView } from './SliderView';
 import { GridView } from './GridView';

@@ -4,14 +4,22 @@
 
 import { useProductStore } from '@/store/useProductStore';
 
+
 import { SharedGrid } from '@/components/shared/CardGrid/CardGrid';
 import { getCategoriesFromProducts, getFeaturedProducts } from '@/lib/productUtils';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function HomePage() {
-  const { products, isLoading, getProductsByCategory } = useProductStore();
+  const { products, isLoading, getProductsByCategory, isInitialized, initializeStore } = useProductStore();
+  const navigate = useRouter()
   
   const categories = getCategoriesFromProducts(products);
   const featuredProducts = getFeaturedProducts(products, 8);
+
+  useEffect(() => {
+    initializeStore();
+  }, [isInitialized, initializeStore]);
   
   return (
     <div className="container mx-auto py-8 space-y-16">
@@ -39,7 +47,7 @@ export default function HomePage() {
         title="Featured Products"
         description="Our most popular items"
         onItemClick={(id) => {
-          console.log('Product clicked:', id);
+          navigate.push(`/product/${id}`);
         }}
       />
     </div>
