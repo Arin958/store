@@ -24,6 +24,7 @@ interface CartStore {
   items: CartItem[];
   couponCode: string | null;
   error: string | null;
+  loading: boolean;
 
   initializeCart: (userId?: string) => void;
 
@@ -60,8 +61,11 @@ export const useCartStore = create<CartStore>()(
       items: [],
       couponCode: null,
       error: null,
+      loading: true,
 
       initializeCart: (userId) => {
+        set({ loading: true });
+        
         const state = get();
 
         if (
@@ -74,13 +78,19 @@ export const useCartStore = create<CartStore>()(
             items: [],
             couponCode: null,
             error: null,
+            loading: false,
           });
 
           return;
         }
 
         if (userId) {
-          set({ userId });
+          set({ 
+            userId,
+            loading: false,
+          });
+        } else {
+          set({ loading: false });
         }
       },
 
@@ -89,27 +99,27 @@ export const useCartStore = create<CartStore>()(
         quantity = 1,
         attributes
       ) => {
+        set({ loading: true, error: null });
+
         set((state) => {
           const existing = state.items.find(
             (item) => item.productId === product.id
           );
 
+          let updatedItems;
+          
           if (existing) {
-            return {
-              items: state.items.map((item) =>
-                item.productId === product.id
-                  ? {
-                      ...item,
-                      quantity:
-                        item.quantity + quantity,
-                    }
-                  : item
-              ),
-            };
-          }
-
-          return {
-            items: [
+            updatedItems = state.items.map((item) =>
+              item.productId === product.id
+                ? {
+                    ...item,
+                    quantity:
+                      item.quantity + quantity,
+                  }
+                : item
+            );
+          } else {
+            updatedItems = [
               ...state.items,
               {
                 id: crypto.randomUUID(),
@@ -118,16 +128,24 @@ export const useCartStore = create<CartStore>()(
                 quantity,
                 selectedAttributes: attributes,
               },
-            ],
+            ];
+          }
+
+          return {
+            items: updatedItems,
+            loading: false,
           };
         });
       },
 
       removeItem: (cartItemId) => {
+        set({ loading: true });
+
         set((state) => ({
           items: state.items.filter(
             (item) => item.id !== cartItemId
           ),
+          loading: false,
         }));
       },
 
@@ -140,29 +158,39 @@ export const useCartStore = create<CartStore>()(
           return;
         }
 
+        set({ loading: true });
+
         set((state) => ({
           items: state.items.map((item) =>
             item.id === cartItemId
               ? { ...item, quantity }
               : item
           ),
+          loading: false,
         }));
       },
 
-      clearCart: () =>
+      clearCart: () => {
+        set({ loading: true });
+
         set({
           items: [],
           couponCode: null,
           error: null,
-        }),
+          loading: false,
+        });
+      },
 
       applyCoupon: (code) => {
+        set({ loading: true, error: null });
+
         const coupon =
           VALID_COUPONS[code.toUpperCase()];
 
         if (!coupon) {
           set({
             error: 'Invalid coupon code',
+            loading: false,
           });
 
           return false;
@@ -179,6 +207,7 @@ export const useCartStore = create<CartStore>()(
         ) {
           set({
             error: `Minimum order of $${coupon.minOrder} required`,
+            loading: false,
           });
 
           return false;
@@ -187,16 +216,21 @@ export const useCartStore = create<CartStore>()(
         set({
           couponCode: code.toUpperCase(),
           error: null,
+          loading: false,
         });
 
         return true;
       },
 
-      removeCoupon: () =>
+      removeCoupon: () => {
+        set({ loading: true });
+
         set({
           couponCode: null,
           error: null,
-        }),
+          loading: false,
+        });
+      },
 
       isInCart: (productId) =>
         get().items.some(
@@ -218,6 +252,7 @@ export const useCartStore = create<CartStore>()(
         userId: state.userId,
         items: state.items,
         couponCode: state.couponCode,
+        // We don't persist loading state
       }),
     }
   )
