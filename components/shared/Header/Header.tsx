@@ -13,6 +13,8 @@ import {
   Home
 } from 'lucide-react';
 import { useAuthStore } from '@/store/useAuthStore';
+import { CartDrawer } from '@/components/cart/CartDrawer';
+import { Button } from '@/components/ui/button';
 
 // Types
 interface NavItem {
@@ -42,6 +44,7 @@ export const Header: React.FC = () => {
   const { user, isAuthenticated, logout } = useAuthStore();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [cart, isCart] = useState(false)
 
   // Handlers
   const handleLogout = () => {
@@ -237,6 +240,7 @@ export const Header: React.FC = () => {
 
   return (
     <>
+    <CartDrawer open={cart} onOpenChange={isCart} />
       <header className="sticky top-0 z-40 bg-white dark:bg-gray-900 border-b dark:border-gray-800 shadow-sm">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
@@ -256,6 +260,9 @@ export const Header: React.FC = () => {
             <div className="flex items-center space-x-2">
               {renderSearchBar()}
               {renderUserSection()}
+              <Button onClick={() => isCart(true)}>
+                <ShoppingCart size={24} />
+              </Button>
             </div>
           </div>
         </div>
