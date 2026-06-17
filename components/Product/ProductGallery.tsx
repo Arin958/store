@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { ChevronLeft, ChevronRight, ZoomIn, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 interface ProductGalleryProps {
     images: string[];
@@ -72,6 +72,9 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
                         </button>
                     </DialogTrigger>
                     <DialogContent className="max-w-[90vw] max-h-[90vh] p-0 bg-transparent border-0">
+                        <DialogHeader className="sr-only">
+    <DialogTitle>Product Image Zoom</DialogTitle>
+  </DialogHeader>
                         <div className="relative w-full h-[80vh]">
                             <Image
                                 src={images[selectedIndex] || '/placeholder-product.jpg'}
@@ -79,14 +82,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
                                 fill
                                 className="object-contain"
                             />
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white"
-                                onClick={() => setIsZoomOpen(false)}
-                            >
-                                <X className="w-5 h-5" />
-                            </Button>
+                         
                         </div>
                     </DialogContent>
                 </Dialog>
