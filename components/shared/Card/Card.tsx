@@ -1,6 +1,5 @@
 import { cn } from '@/lib/utils';
 import { ReactNode } from 'react';
-import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent } from '@/components/ui/card';
 import { CardImage } from './CardImage';
 import { CategoryContent, ProductContent } from './ProductContent';
