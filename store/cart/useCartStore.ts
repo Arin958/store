@@ -5,19 +5,7 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 
 import { Product } from '@/types/product';
 import { CartItem } from '@/types/cart';
-import { useCartSelectors } from './useCartSelector';
 
-type Coupon = {
-  discount: number;
-  type: 'percentage' | 'fixed';
-  minOrder?: number;
-};
-
-const VALID_COUPONS: Record<string, Coupon> = {
-  SAVE10: { discount: 10, type: 'percentage', minOrder: 50 },
-  SAVE20: { discount: 20, type: 'percentage', minOrder: 100 },
-  FREESHIP: { discount: 0, type: 'fixed' },
-};
 
 interface CartStore {
   userId: string | null;
@@ -43,15 +31,9 @@ interface CartStore {
 
   clearCart: () => void;
 
-  applyCoupon: (code: string) => boolean;
 
-  removeCoupon: () => void;
 
-  isInCart: (productId: string) => boolean;
 
-  getItemByProductId: (
-    productId: string
-  ) => CartItem | undefined;
 }
 
 export const useCartStore = create<CartStore>()(
@@ -181,46 +163,6 @@ export const useCartStore = create<CartStore>()(
         });
       },
 
-      applyCoupon: (code) => {
-        set({ loading: true, error: null });
-
-        const coupon =
-          VALID_COUPONS[code.toUpperCase()];
-
-        if (!coupon) {
-          set({
-            error: 'Invalid coupon code',
-            loading: false,
-          });
-
-          return false;
-        }
-
-        const subtotal =
-          useCartSelectors.subtotal(
-            get().items
-          );
-
-        if (
-          coupon.minOrder &&
-          subtotal < coupon.minOrder
-        ) {
-          set({
-            error: `Minimum order of $${coupon.minOrder} required`,
-            loading: false,
-          });
-
-          return false;
-        }
-
-        set({
-          couponCode: code.toUpperCase(),
-          error: null,
-          loading: false,
-        });
-
-        return true;
-      },
 
       removeCoupon: () => {
         set({ loading: true });
@@ -231,16 +173,6 @@ export const useCartStore = create<CartStore>()(
           loading: false,
         });
       },
-
-      isInCart: (productId) =>
-        get().items.some(
-          (item) => item.productId === productId
-        ),
-
-      getItemByProductId: (productId) =>
-        get().items.find(
-          (item) => item.productId === productId
-        ),
     }),
     {
       name: 'cart-storage',
@@ -252,7 +184,6 @@ export const useCartStore = create<CartStore>()(
         userId: state.userId,
         items: state.items,
         couponCode: state.couponCode,
-        // We don't persist loading state
       }),
     }
   )
