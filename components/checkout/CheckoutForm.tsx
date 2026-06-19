@@ -18,7 +18,6 @@ import {
   Loader2,
   CheckCircle2,
   Truck,
-  CreditCard,
   MapPin,
   User,
   Mail,
@@ -28,6 +27,9 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { useOrderStore } from '@/store/checkout/useOrderStore';
+import { useCartStore } from '@/store/cart/useCartStore';
+import { useAuthStore } from '@/store/useAuthStore';
 
 export interface CheckoutFormData {
   fullName: string;
@@ -44,7 +46,11 @@ export interface CheckoutFormData {
 export default function CheckoutForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-
+  const createOrder = useOrderStore((state) => state.createOrder);
+  const clearCart = useCartStore((state) => state.clearCart);
+  const items = useCartStore((state) => state.items);
+  const user = useAuthStore((state) => state.user);
+ 
   const {
     register,
     handleSubmit,
@@ -64,20 +70,48 @@ export default function CheckoutForm() {
 
 
 
-  const onSubmit = async (data: CheckoutFormData) => {
-    setIsSubmitting(true);
-    try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log('Checkout Data:', data);
-      setSubmitted(true);
-      // Later: createOrder(data); clearCart(); router.push('/order-success');
-    } catch (error) {
-      console.error('Error placing order:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+const onSubmit = (
+  data: CheckoutFormData
+) => {
+  if (!user) return;
+
+  const subtotal = items.reduce(
+    (sum, item) =>
+      sum +
+      item.product.price *
+        item.quantity,
+    0
+  );
+
+  const shipping =
+    subtotal > 0 ? 5 : 0;
+
+  const total =
+    subtotal + shipping;
+
+  const orderId =
+    createOrder({
+      userId: user.id,
+      items,
+      customerInfo: data,
+      subTotal: subtotal,
+      shipping,
+      total,
+
+      status: 'pending',
+    });
+
+  clearCart();
+
+  alert(
+    `Order Placed Successfully! Order ID: ${orderId}`
+  );
+
+  setSubmitted(true);
+  setIsSubmitting(false);
+
+
+};
 
 
 
